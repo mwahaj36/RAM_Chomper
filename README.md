@@ -1,4 +1,4 @@
-# RAM Chomper 🍽️🚀
+# RAM Chomper 
 
 Ever look at your task manager and think, *"Man, my RAM is just sitting there doing nothing. I paid for 32GB, I'm gonna use 32GB!"*? 
 
