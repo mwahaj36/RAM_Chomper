@@ -185,6 +185,10 @@ class RAMChomperTray(QSystemTrayIcon):
         
         menu.addSeparator()
         
+        disclaimer_action = QAction("Disclaimer", menu)
+        disclaimer_action.triggered.connect(self.show_disclaimer)
+        menu.addAction(disclaimer_action)
+        
         exit_action = QAction("Exit", menu)
         exit_action.triggered.connect(self.app.quit)
         menu.addAction(exit_action)
@@ -280,6 +284,13 @@ class RAMChomperTray(QSystemTrayIcon):
                                       1024, 0, max_mb, 128)
         if ok:
             self.chomp_memory(val)
+
+    def show_disclaimer(self):
+        QMessageBox.information(None, "Disclaimer", 
+            "This is a stupid app made for fun. It literally just eats RAM for no reason.\n\n"
+            "Use it at your own risk. While it has safety checks, intentionally filling your RAM "
+            "is generally a silly thing to do. The author is not responsible for any "
+            "crashes, lost data, or existential crises caused by your lack of available memory.")
 
     def release_memory(self):
         self.mem_manager.release()

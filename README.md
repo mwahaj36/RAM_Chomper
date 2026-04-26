@@ -7,7 +7,10 @@ Welcome to **RAM Chomper**, the only app that exists solely to satisfy your hung
 ## why?
 - **Stability Testing**: See how your PC handles actual pressure.
 - **Flexing**: Make your "Memory Used" graph look like a mountain range.
-- **Spite**: Because you paid for those sticks and you'll be damned if they stay idle.
+- **Spite**: Because you paid for those sticks and you'll be damned if they stay idle. Especially since AI has caused a RAM shortage, you should use every byte you paid for.
+
+> [!CAUTION]
+> **Disclaimer**: This is a stupid app. It serves no productive purpose. Use it at your own risk. The author is not responsible for any system instability, crashes, or the sudden realization that you've wasted your life filling RAM with zeros.
 
 ## ✨ Features
 - **📍 Stealth Mode**: Lives in the tray. No windows, no clutter, just vibes.
