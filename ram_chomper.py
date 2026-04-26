@@ -103,6 +103,25 @@ class MemoryManager:
         average_load_gb = (self.integral_bytes_seconds / uptime) / 1024**3
         return lifetime_gb, average_load_gb
 
+    def check_and_fart(self):
+        """ Automatically release memory if system needs it """
+        available = self.get_available_memory_bytes()
+        threshold = self.get_safety_threshold_bytes()
+        
+        farted_count = 0
+        # Release chunks one by one if we're under the threshold
+        while (available < threshold) and self.chomped_memory:
+            # Pop the oldest chunk (FIFO)
+            self.chomped_memory.pop(0)
+            farted_count += 1
+            # Recalculate available (approximate or refresh)
+            available = self.get_available_memory_bytes()
+            
+        if farted_count > 0:
+            gc.collect()
+            return True, farted_count
+        return False, 0
+
 class RAMChomperTray(QSystemTrayIcon):
     def __init__(self, app):
         super().__init__()
@@ -207,6 +226,8 @@ class RAMChomperTray(QSystemTrayIcon):
             
             if not tinted_pixmap.isNull():
                 self.setIcon(QIcon(tinted_pixmap))
+        # Check for boundary cross (Farting)
+        farted, count = self.mem_manager.check_and_fart()
         
         chomped_gb = self.mem_manager.get_current_chomped_gb()
         lifetime_gb, avg_rate = self.mem_manager.get_stats()
@@ -219,7 +240,9 @@ class RAMChomperTray(QSystemTrayIcon):
         self.lifetime_action.setText(f"Lifetime: {lifetime_gb:.2f} GB")
         self.rate_action.setText(f"Average Load: {avg_rate:.2f} GB")
         
-        if chomped_gb > 0:
+        if farted:
+            self.setToolTip(f"RAM Chomper - FARTING (Released {count} chunks for system!)")
+        elif chomped_gb > 0:
             self.setToolTip(f"RAM Chomper - Chomping {chomped_gb:.2f} GB")
         else:
             self.setToolTip("RAM Chomper - Idle")

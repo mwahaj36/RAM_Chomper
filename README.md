@@ -15,6 +15,7 @@ Welcome to **RAM Chomper**, the only app that exists solely to satisfy your hung
 - **🍕 Custom Portions**: Eat a snack (512MB) or a full meal (4GB+). You can even set a custom weight.
 - **🛡️ Safety First**: It won't let you crash your system. It keeps a tiny reserve so your OS doesn't have a heart attack.
 - **📈 Stats**: Track your current "meal", your lifetime total, and your average load.
+- **💨 Farting**: If you open a heavy app (like a game or Chrome), RAM Chomper will automatically "fart" out its memory chunks to keep your system stable.
 
 ## 🛠️ Installation (for the nerds)
 1. **Clone it**:
